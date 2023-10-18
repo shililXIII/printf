@@ -75,8 +75,8 @@ int print_rot13string(va_list typ, char buff[], int flags, int width, int prec, 
 int ha_write_char(char c, char buff[], int flags, int width, int prec, int si);
 int write_number(int is_positive, int ind, char buffer[], int flags, int width, int prec, int si);
 int write_num(int ind, char bff[], int flags, int width, int prec, int length, char padd, char extra_c);
-int write_ptr(char buffer[], int ind, int length, int width, int flags, char padd, char extra_c, int padd_start);
-int write_unsgnd(int is_negative, int ind, char buffer[], int flags, int width, int prec, int si);
+int write_ptr(char buff[], int ind, int length, int width, int flags, char padd, char extra_c, int padd_start);
+int write_unsgnd(int is_negative, int ind, char buff[], int flags, int width, int prec, int si);
 
 /**utils**/
 int printable(char);
