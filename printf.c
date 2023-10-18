@@ -1,6 +1,6 @@
 #include "main.h"
 
-void print_boff(char buffer[], int *bu);
+void print_buff(char buff[], int *buff_ind);
 
 /**
  * _printf - output the function
@@ -10,9 +10,9 @@ void print_boff(char buffer[], int *bu);
 int _printf(const char *format, ...)
 {
 	int i, p = 0, pc = 0;
-	int f, w, prec, s, bu = 0;
+	int flags, width, prec, si, buff_ind = 0;
 	va_list list;
-	char buffer[BUFF_SIZE];
+	char buff[BUFF_SIZE];
 
 	if (format == NULL)
 		return (-1);
@@ -23,29 +23,28 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] != '%')
 		{
-			buffer[bu++] = format[i];
-			if (bu == BUFF_SIZE)
-				print_boff(buffer, &bu);
+			buff[buff_ind++] = format[i];
+			if (buff_ind == BUFF_SIZE)
+				print_buff(buff, &buff_ind);
 			/* write(1, &format[i], 1);*/
 			pc++;
 		}
 		else
 		{
-			print_boff(buffer, &bu);
-			f = g_flags(format, &i);
-			w = g_width(format, &i, list);
+			print_buff(buff, &buff_ind);
+			flags = g_flags(format, &i);
+			width = g_width(format, &i, list);
 			prec = get_precision(format, &i, list);
-			s = get_size(format, &i);
+			si = get_size(format, &i);
 			++i;
-			p = handle_print(format, &i, list, buffer,
-				f, w, prec, s);
+			p = ha_print(format, &i, list, buff, flags, width, prec, si);
 			if (p == -1)
 				return (-1);
 			pc += p;
 		}
 	}
 
-	print_boff(buffer, &bu);
+	print_buff(buff, &buff_ind);
 
 	va_end(list);
 
@@ -57,10 +56,9 @@ int _printf(const char *format, ...)
  * @buffer: Enter Array of characters
  * @bu: Index numberv at which to add skip characters, represents the length.
  */
-void print_boff(char buffer[], int *bu)
+void print_buff(char buff[], int *buff_ind)
 {
-	if (*bu > 0)
-		write(1, &buffer[0], *bu);
-
-	*bu = 0;
+	if (*buff_ind > 0)
+		write(1, &buff[0], *buff_ind);
+	*buff_ind = 0;
 }
