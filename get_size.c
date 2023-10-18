@@ -2,7 +2,7 @@
 
 /**
  * get_size - this fun for  Calculates the size to next the argument
- * @format: calculates a  Formatted string in which into print the arguments
+ * @format: calculates   Formatted string in which into print the arguments
  * @p: display the  List of arguments to be print.
  *
  * Return: return value  Precision.
